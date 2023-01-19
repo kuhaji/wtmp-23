@@ -1,0 +1,19 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "semi": "error",
+    "quotes": ["warn", "single"],
+    "no-multiple-empty-lines": "warn",
+    "eol-last": ["warn", "always"]
+  }
+}

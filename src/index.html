@@ -1,14 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset="utf-8"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <title>Lounari</title>
   </head>
+
   <body>
-    <p>
-      Hello! Open the developer tools, please.<br />
-      Start by editing the files in <code>src/</code> folder.
-    </p>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <ul>
+        <li><a href="#">Etusivu</a></li>
+        <li><a href="#">Ruokalistat</a></li>
+        <li><a href="#">Ravintolat</a></li>
+        <li><a href="#">Yhteystiedot</a></li>
+      </ul>
+      <span>
+        <form class="search-form">
+          <label for="search" class="searchIcon">
+            <img src="/src/assets/favicon.ico" />
+          </label>
+          <input
+            type="text"
+            name="search"
+            class="search"
+            placeholder="Etsi nimellä.."
+          />
+        </form>
+      </span>
+    </nav>
+    <!-- First Container -->
+    <header class="topContainer">
+      <div class="topcon-textarea">
+        <div class="topcon-text">Lounari.</div>
+        <div class="topcon-smalltext">Mitä tänään syötäisiin?</div>
+      </div>
+      <div class="topcon-img">
+        <div class="triangle"></div>
+      </div>
+    </header>
+    <main>
+      <!-- Text Section -->
+      <div class="textarea">
+        <div class="text-only">
+          Missä tänään syötäisiin? Tuttu tarina ennen lounashetkeä.
+          <br />
+          Palvelu etsii lähelläsi olevat lounaspaikat, sekä näyttää niiden
+          päivittäisen lounaslistan. Viikottaiset lounaslistat ovat myös
+          käytettävissäsi. Pääset niihin klikkaamalla ravintolan logoa
+        </div>
+      </div>
+      <div class="boxes">
+        <div class="box">
+          <div class="menuImg">
+            <img src="/src/assets/food.jpeg" />
+          </div>
+          <div class="menu">
+            <div class="menuTitle">Metropolia Myyrmäki</div>
+            <div>
+              <div class="menu-box"></div>
+              <button id="sort-button">Sort</button>
+              <button id="lang-button">FI / EN</button>
+              <button id="rend-button">Pick a random</button>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="menuImg">
+            <img src="/src/assets/food.jpeg" />
+          </div>
+          <div class="menu">
+            <div class="menuTitle">Metropolia Myyrmäki</div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="index.js"></script>
   </body>
 </html>

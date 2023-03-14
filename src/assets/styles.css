@@ -113,7 +113,7 @@ nav span {
 }
 .topcon-img {
   flex: 6;
-  background: white url('../food.jpeg') no-repeat center center/cover;
+  background: white url('../assets/food.jpeg') no-repeat center center/cover;
 }
 .triangle {
   width: 0;

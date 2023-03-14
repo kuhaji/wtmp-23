@@ -1,30 +1,27 @@
-import Menu from '../src/menu.json';
-// console.log('menu from json', Menu);
+// Import data from modules
+import Fazer from './modules/fazer-data';
+import Sodexo from './modules/sodexo-data';
 
-// Convert Menu.courses object to array and extract title_* values only
-const coursesEn = Object.values(Menu.courses).map((course) => course.title_en);
-const coursesFi = Object.values(Menu.courses).map((course) => course.title_fi);
-
+// Global variables
 let lang = 'fi';
-let activeMenu = coursesFi;
+let menuContainers = [];
+let activeMenus = [];
 
 /**
  * Renders menu content to html page
  * @param {Array} menu - array of dishes
  */
-const renderMenu = (menu) => {
-  const menuBox = document.querySelector('.menu-box');
-  menuBox.innerHTML = '';
+const renderMenu = (menu, targetElem) => {
+  const menuContainer = targetElem;
+  menuContainer.innerHTML = '';
   const list = document.createElement('ul');
   for (const dish of menu) {
     const li = document.createElement('li');
     li.textContent = dish;
     list.append(li);
   }
-  menuBox.append(list);
+  menuContainer.append(list);
 };
-
-renderMenu(activeMenu);
 
 /**
  * Sorts menu alphapetically
@@ -45,16 +42,19 @@ const sortMenu = (menu, order = 'asc') => {
  * @param {string} language
  */
 const changeLanguage = (language) => {
-  if (language === lang) {
+  if (language === 'fi') {
     // if the language is the same as the current language, toggle to the other language
-    activeMenu = language === 'fi' ? coursesEn : coursesFi;
-    lang = language === 'fi' ? 'en' : 'fi';
-  } else {
+    activeMenus[0] = Sodexo.coursesFi;
+    activeMenus[1] = Fazer.coursesFi;
+  } else if (language === 'en') {
     // if the language is different from the current language, switch to the new language
-    activeMenu = language === 'fi' ? coursesFi : coursesEn;
-    lang = language;
+    activeMenus[0] = Sodexo.coursesEn;
+    activeMenus[1] = Fazer.coursesEn;
   }
-  renderMenu(activeMenu);
+  lang = language;
+  for (const [index, menu] of activeMenus.entries()) {
+    renderMenu(menu, menuContainers[index]);
+  }
 };
 
 /**
@@ -69,7 +69,7 @@ const getRandomDish = (menu) => {
 
 const sortButton = document.querySelector('#sort-button');
 sortButton.addEventListener('click', () => {
-  renderMenu(sortMenu(activeMenu));
+  renderMenu(sortMenu(activeMenus[0]));
 });
 
 const langButton = document.querySelector('#lang-button');
@@ -83,7 +83,7 @@ langButton.addEventListener('click', () => {
 
 const rendButton = document.querySelector('#rend-button');
 rendButton.addEventListener('click', () => {
-  const randomDish = getRandomDish(activeMenu);
+  const randomDish = getRandomDish(activeMenus[0]);
   const randomDishBox = document.createElement('div');
   randomDishBox.textContent = randomDish;
   document.body.append(randomDishBox);
@@ -91,3 +91,15 @@ rendButton.addEventListener('click', () => {
 
 // TODO: Add a button for changing the language of the menu
 // TODO: Add a button that picks a random dish from the array and displays it
+
+/**
+ * App initalization
+ */
+const init = () => {
+  activeMenus = [Sodexo.coursesFi, Fazer.coursesFi];
+  menuContainers = document.querySelectorAll('.menu-container');
+  for (const [index, menu] of activeMenus.entries()) {
+    renderMenu(menu, menuContainers[index]);
+  }
+};
+init();

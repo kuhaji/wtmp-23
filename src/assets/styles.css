@@ -168,6 +168,7 @@ img {
   flex: 7;
   padding: 0 0 1em 1em;
   line-height: 110%;
+  margin: 10px;
 }
 .menu * {
   font-size: 14px;
